@@ -1,3 +1,4 @@
 .vs/
-DotNetTips.2021.001/bin/
-DotNetTips.2021.001/obj/
+DotNetTips/DotNetTips.2021.001/bin/
+DotNetTips/DotNetTips.2021.001/obj/
+*.user
