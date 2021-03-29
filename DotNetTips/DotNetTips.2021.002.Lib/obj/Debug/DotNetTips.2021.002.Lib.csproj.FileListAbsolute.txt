@@ -1,0 +1,6 @@
+C:\Users\dssca\Documents\GitHub\dotnettips\DotNetTips\DotNetTips.2021.002.Lib\bin\Debug\DotNetTips.2021.002.Lib.dll
+C:\Users\dssca\Documents\GitHub\dotnettips\DotNetTips\DotNetTips.2021.002.Lib\bin\Debug\DotNetTips.2021.002.Lib.pdb
+C:\Users\dssca\Documents\GitHub\dotnettips\DotNetTips\DotNetTips.2021.002.Lib\obj\Debug\DotNetTips.2021.002.Lib.csprojAssemblyReference.cache
+C:\Users\dssca\Documents\GitHub\dotnettips\DotNetTips\DotNetTips.2021.002.Lib\obj\Debug\DotNetTips.2021.002.Lib.csproj.CoreCompileInputs.cache
+C:\Users\dssca\Documents\GitHub\dotnettips\DotNetTips\DotNetTips.2021.002.Lib\obj\Debug\DotNetTips.2021.002.Lib.dll
+C:\Users\dssca\Documents\GitHub\dotnettips\DotNetTips\DotNetTips.2021.002.Lib\obj\Debug\DotNetTips.2021.002.Lib.pdb

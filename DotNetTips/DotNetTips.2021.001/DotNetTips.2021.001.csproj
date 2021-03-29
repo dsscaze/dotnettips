@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcessoDados.cs" />
+    <Compile Include="Carro.cs" />
     <Compile Include="deafult.aspx.cs">
       <DependentUpon>deafult.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -97,6 +98,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetTips.2021.002.Lib\DotNetTips.2021.002.Lib.csproj">
+      <Project>{6f7b2fc5-5506-4068-adeb-87ee40fc026a}</Project>
+      <Name>DotNetTips.2021.002.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
