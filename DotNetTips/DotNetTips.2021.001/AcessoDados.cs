@@ -2,56 +2,128 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace DotNetTips._2021._001
 {
+    public enum BancoDadosTipo
+    {
+        SQLServer = 1,
+        SQLite = 2
+    }
+
     public class AcessoDados : IDisposable
     {
         private string sqlConn = ConfigurationManager.ConnectionStrings["ConexaoPadrao"].ToString();
+        private string sqlConnSQLite = ConfigurationManager.AppSettings["ConexaoPadraoSQLite"].ToString();
         private SqlConnection conn;
+        private SQLiteConnection connSQLite;
+        private BancoDadosTipo _tipo;
 
-        public AcessoDados()
+        public AcessoDados(BancoDadosTipo tipo)
         {
-            conn = new SqlConnection(sqlConn);
-            conn.Open();
+            _tipo = tipo;
+            if (_tipo == BancoDadosTipo.SQLServer)
+            {
+                conn = new SqlConnection(sqlConn);
+                conn.Open();
+            }
+            else if (_tipo == BancoDadosTipo.SQLite)
+            {
+                connSQLite = new SQLiteConnection(sqlConnSQLite);
+                connSQLite.Open();
+            }
+            else
+            {
+                throw new Exception("Banco de dados não reconhecido");
+            }
         }
 
         public void executaComando(string comandoSql)
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = comandoSql;
-            cmd.CommandType = CommandType.Text;
+            if (_tipo == BancoDadosTipo.SQLServer)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = comandoSql;
+                cmd.CommandType = CommandType.Text;
 
-            cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+            }
+            else if (_tipo == BancoDadosTipo.SQLite)
+            {
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd.Connection = connSQLite;
+                cmd.CommandText = comandoSql;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+            }
+            else
+            {
+                throw new Exception("Banco de dados não reconhecido");
+            }
         }
 
         public DataSet listar()
         {
-            
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = "select * from usuario";
-            cmd.CommandType = CommandType.Text;
-
-            SqlDataAdapter da = new SqlDataAdapter();
-            da.SelectCommand = cmd;
-
             DataSet ds = new DataSet();
 
-            da.Fill(ds);
+            if (_tipo == BancoDadosTipo.SQLServer)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "select * from usuario";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+            }
+            else if (_tipo == BancoDadosTipo.SQLite)
+            {
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd.Connection = connSQLite;
+                cmd.CommandText = "select * from usuario";
+                cmd.CommandType = CommandType.Text;
+
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+            }
+            else
+            {
+                throw new Exception("Banco de dados não reconhecido");
+            }
 
             return ds;
         }
 
         public void Dispose()
         {
-            if (conn != null)
+            if (_tipo == BancoDadosTipo.SQLServer)
             {
-                if (conn.State != ConnectionState.Closed)
+                if (conn != null)
                 {
-                    conn.Close();
+                    if (conn.State != ConnectionState.Closed)
+                    {
+                        conn.Close();
+                    }
                 }
+            }
+            else if (_tipo == BancoDadosTipo.SQLite)
+            {
+                if (connSQLite != null)
+                {
+                    if (connSQLite.State != ConnectionState.Closed)
+                    {
+                        connSQLite.Close();
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Banco de dados não reconhecido");
             }
         }
     }
