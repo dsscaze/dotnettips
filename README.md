@@ -1,6 +1,12 @@
 # Canal Programador Raiz
 https://www.youtube.com/channel/UChqzXktYvjxaYFnzlTvYhKA
 
+## Participe do grupo no Telegram e fique por dentro de todas as novidades do canal
+https://t.me/ProgramadorRaiz
+
+## Instagram 
+https://www.instagram.com/programador_raiz/
+
 ## dotnettips
 Contém o código de várias dicas e vídeos do canal
 - COMO CONECTAR EM UMA BASE DE DADOS PROGRAMATICAMENTE - TIP.2021.001 https://www.youtube.com/watch?v=4z8koXOBZCA
